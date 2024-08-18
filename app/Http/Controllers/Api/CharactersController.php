@@ -11,6 +11,19 @@ use App\Models\Episode;
 
 class CharactersController extends Controller
 {
+    /**
+     * Lista de Rick&Morty
+     * 
+     * Este metodo devuelve el listado de personajes de Rick&Morty API
+     * 
+     * @unauthenticated
+     * 
+     * @queryParam page integer Number of page. Example: 1
+     * @queryParam name string Character's name. Example: Cult Leader Morty
+     * @queryParam status string Character's status. Example: Alive
+     * @queryParam species string Character's species. Example: Human
+     * @queryParam gender string Character's gender. Example: Male
+     */
     public function getAll(Request $request)
     {
         $rickAndMorty = new RickAndMorty();
@@ -19,6 +32,17 @@ class CharactersController extends Controller
         return response($characters, Response::HTTP_OK);
     }
     
+    /**
+     * Lista de favoritos
+     * 
+     * Este metodo devuelve el listado de los favoritos personajes del usuario
+     * 
+     * @queryParam page integer Number of page. Example: 1
+     * @queryParam name string Character's name. Example: Cult Leader Morty
+     * @queryParam status string Character's status. Example: Alive
+     * @queryParam species string Character's species. Example: Human
+     * @queryParam gender string Character's gender. Example: Male
+     */
     public function getFavorites(Request $request)
     {
         $myCharacters = Character::getCurrentUserList($request->all());
@@ -26,6 +50,13 @@ class CharactersController extends Controller
         return response($myCharacters, Response::HTTP_OK);
     }
     
+    /**
+     * Guardar personaje
+     * 
+     * Este metodo guarda el personaje en el listado de favoritos
+     * 
+     * @bodyParam id integer required Rick&Morty character's id. Example: 1
+     */
     public function saveCharacter(Request $request)
     {
         $request->validate([
@@ -51,10 +82,18 @@ class CharactersController extends Controller
         }       
         
         $character->users()->syncWithoutDetaching(auth()->user()->id);
+        $character->episodes = $character->episodes()->get();
         
         return response($character, Response::HTTP_OK);
     }
     
+    /**
+     * Quitar personaje
+     * 
+     * Este metodo quita el personaje del listado de favoritos
+     * 
+     * @urlParam id integer required Character's ID. Example: 1
+     */
     public function deleteCharacter($id)
     {
         $character = Character::getFavoriteByParam('id', $id);

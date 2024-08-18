@@ -1,0 +1,312 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Laravel API",
+        "_postman_id": "1238297f-b6da-420b-8b7d-834b393b7882",
+        "description": "API for getting and managing of Rick&Morty characters",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Registro",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registro",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registro"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"user1\",\"email\":\"test@test.com\",\"password\":\"12345\",\"password_confirmation\":\"12345\"}"
+                        },
+                        "description": "Este metodo registra al usuario en el API",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"test@test.com\",\"password\":\"12345\"}"
+                        },
+                        "description": "Este metodo devuelve el token del usuario",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Lista de Rick&Morty",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/personajes",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Number of page.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "name",
+                                    "value": "Cult+Leader+Morty",
+                                    "description": "Character's name.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "Alive",
+                                    "description": "Character's status.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "species",
+                                    "value": "Human",
+                                    "description": "Character's species.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "gender",
+                                    "value": "Male",
+                                    "description": "Character's gender.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/personajes?page=1&name=Cult+Leader+Morty&status=Alive&species=Human&gender=Male"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Este metodo devuelve el listado de personajes de Rick&Morty API",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"info\":{\"count\":1,\"pages\":1,\"next\":null,\"prev\":null},\"results\":[{\"id\":84,\"name\":\"Cult Leader Morty\",\"status\":\"Alive\",\"species\":\"Human\",\"type\":\"\",\"gender\":\"Male\",\"origin\":{\"name\":\"unknown\",\"url\":\"\"},\"location\":{\"name\":\"Hideout Planet\",\"url\":\"https:\\\/\\\/rickandmortyapi.com\\\/api\\\/location\\\/27\"},\"image\":\"https:\\\/\\\/rickandmortyapi.com\\\/api\\\/character\\\/avatar\\\/84.jpeg\",\"episode\":[\"https:\\\/\\\/rickandmortyapi.com\\\/api\\\/episode\\\/10\"],\"url\":\"https:\\\/\\\/rickandmortyapi.com\\\/api\\\/character\\\/84\",\"created\":\"2017-11-30T20:41:48.080Z\"}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Lista de favoritos",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/favoritos",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Number of page.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "name",
+                                    "value": "Cult+Leader+Morty",
+                                    "description": "Character's name.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "Alive",
+                                    "description": "Character's status.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "species",
+                                    "value": "Human",
+                                    "description": "Character's species.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "gender",
+                                    "value": "Male",
+                                    "description": "Character's gender.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/favoritos?page=1&name=Cult+Leader+Morty&status=Alive&species=Human&gender=Male"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Este metodo devuelve el listado de los favoritos personajes del usuario"
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Guardar personaje",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/favoritos",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/favoritos"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":1}"
+                        },
+                        "description": "Este metodo guarda el personaje en el listado de favoritos"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Quitar personaje",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/favoritos\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/favoritos\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "Character's ID."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Este metodo quita el personaje del listado de favoritos"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "type": "string"
+            }
+        ]
+    }
+}

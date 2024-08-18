@@ -11,6 +11,18 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    /**
+     * Registro
+     * 
+     * Este metodo registra al usuario en el API
+     * 
+     * @unauthenticated
+     * 
+     * @bodyParam name string required User's name. Example: user1
+     * @bodyParam email string required User's email. Example: test@test.com
+     * @bodyParam password string required User's password. Example: 12345
+     * @bodyParam password_confirmation string required User's password for confirmation. Example: 12345
+     */
     public function register(Request $request)
     {
         $request->validate([
@@ -28,6 +40,16 @@ class AuthController extends Controller
         return response($user, Response::HTTP_CREATED);
     }
     
+    /**
+     * Login
+     * 
+     * Este metodo devuelve el token del usuario
+     * 
+     * @unauthenticated
+     * 
+     * @bodyParam email string required User's email. Example: test@test.com
+     * @bodyParam password string required User's password. Example: 12345
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -42,6 +64,6 @@ class AuthController extends Controller
             return response(['token' => $token], Response::HTTP_OK)->withoutCookie($cookie);
         }
         
-        return response(['message' => 'Credenciales invalidas'], Response::HTTP_UNAUTHORIZED);
+        return response(['error' => 'Invalid credentials'], Response::HTTP_UNAUTHORIZED);
     }
 }

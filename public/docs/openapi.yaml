@@ -1,0 +1,380 @@
+openapi: 3.0.3
+info:
+  title: 'Laravel API'
+  description: 'API for getting and managing of Rick&Morty characters'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/registro:
+    post:
+      summary: Registro
+      operationId: registro
+      description: 'Este metodo registra al usuario en el API'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "User's name."
+                  example: user1
+                email:
+                  type: string
+                  description: "User's email."
+                  example: test@test.com
+                password:
+                  type: string
+                  description: "User's password."
+                  example: '12345'
+                password_confirmation:
+                  type: string
+                  description: "User's password for confirmation."
+                  example: '12345'
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/login:
+    post:
+      summary: Login
+      operationId: login
+      description: 'Este metodo devuelve el token del usuario'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "User's email."
+                  example: test@test.com
+                password:
+                  type: string
+                  description: "User's password."
+                  example: '12345'
+              required:
+                - email
+                - password
+      security: []
+  /api/personajes:
+    get:
+      summary: 'Lista de Rick&Morty'
+      operationId: listaDeRickMorty
+      description: 'Este metodo devuelve el listado de personajes de Rick&Morty API'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Number of page.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Number of page.'
+            example: 1
+        -
+          in: query
+          name: name
+          description: "Character's name."
+          example: 'Cult Leader Morty'
+          required: false
+          schema:
+            type: string
+            description: "Character's name."
+            example: 'Cult Leader Morty'
+        -
+          in: query
+          name: status
+          description: "Character's status."
+          example: Alive
+          required: false
+          schema:
+            type: string
+            description: "Character's status."
+            example: Alive
+        -
+          in: query
+          name: species
+          description: "Character's species."
+          example: Human
+          required: false
+          schema:
+            type: string
+            description: "Character's species."
+            example: Human
+        -
+          in: query
+          name: gender
+          description: "Character's gender."
+          example: Male
+          required: false
+          schema:
+            type: string
+            description: "Character's gender."
+            example: Male
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  info:
+                    count: 1
+                    pages: 1
+                    next: null
+                    prev: null
+                  results:
+                    -
+                      id: 84
+                      name: 'Cult Leader Morty'
+                      status: Alive
+                      species: Human
+                      type: ''
+                      gender: Male
+                      origin:
+                        name: unknown
+                        url: ''
+                      location:
+                        name: 'Hideout Planet'
+                        url: 'https://rickandmortyapi.com/api/location/27'
+                      image: 'https://rickandmortyapi.com/api/character/avatar/84.jpeg'
+                      episode:
+                        - 'https://rickandmortyapi.com/api/episode/10'
+                      url: 'https://rickandmortyapi.com/api/character/84'
+                      created: '2017-11-30T20:41:48.080Z'
+                properties:
+                  info:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        example: 1
+                      pages:
+                        type: integer
+                        example: 1
+                      next:
+                        type: string
+                        example: null
+                      prev:
+                        type: string
+                        example: null
+                  results:
+                    type: array
+                    example:
+                      -
+                        id: 84
+                        name: 'Cult Leader Morty'
+                        status: Alive
+                        species: Human
+                        type: ''
+                        gender: Male
+                        origin:
+                          name: unknown
+                          url: ''
+                        location:
+                          name: 'Hideout Planet'
+                          url: 'https://rickandmortyapi.com/api/location/27'
+                        image: 'https://rickandmortyapi.com/api/character/avatar/84.jpeg'
+                        episode:
+                          - 'https://rickandmortyapi.com/api/episode/10'
+                        url: 'https://rickandmortyapi.com/api/character/84'
+                        created: '2017-11-30T20:41:48.080Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 84
+                        name:
+                          type: string
+                          example: 'Cult Leader Morty'
+                        status:
+                          type: string
+                          example: Alive
+                        species:
+                          type: string
+                          example: Human
+                        type:
+                          type: string
+                          example: ''
+                        gender:
+                          type: string
+                          example: Male
+                        origin:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: unknown
+                            url:
+                              type: string
+                              example: ''
+                        location:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: 'Hideout Planet'
+                            url:
+                              type: string
+                              example: 'https://rickandmortyapi.com/api/location/27'
+                        image:
+                          type: string
+                          example: 'https://rickandmortyapi.com/api/character/avatar/84.jpeg'
+                        episode:
+                          type: array
+                          example:
+                            - 'https://rickandmortyapi.com/api/episode/10'
+                          items:
+                            type: string
+                        url:
+                          type: string
+                          example: 'https://rickandmortyapi.com/api/character/84'
+                        created:
+                          type: string
+                          example: '2017-11-30T20:41:48.080Z'
+      tags:
+        - Endpoints
+      security: []
+  /api/favoritos:
+    get:
+      summary: 'Lista de favoritos'
+      operationId: listaDeFavoritos
+      description: 'Este metodo devuelve el listado de los favoritos personajes del usuario'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Number of page.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Number of page.'
+            example: 1
+        -
+          in: query
+          name: name
+          description: "Character's name."
+          example: 'Cult Leader Morty'
+          required: false
+          schema:
+            type: string
+            description: "Character's name."
+            example: 'Cult Leader Morty'
+        -
+          in: query
+          name: status
+          description: "Character's status."
+          example: Alive
+          required: false
+          schema:
+            type: string
+            description: "Character's status."
+            example: Alive
+        -
+          in: query
+          name: species
+          description: "Character's species."
+          example: Human
+          required: false
+          schema:
+            type: string
+            description: "Character's species."
+            example: Human
+        -
+          in: query
+          name: gender
+          description: "Character's gender."
+          example: Male
+          required: false
+          schema:
+            type: string
+            description: "Character's gender."
+            example: Male
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    post:
+      summary: 'Guardar personaje'
+      operationId: guardarPersonaje
+      description: 'Este metodo guarda el personaje en el listado de favoritos'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: "Rick&Morty character's id."
+                  example: 1
+              required:
+                - id
+  '/api/favoritos/{id}':
+    delete:
+      summary: 'Quitar personaje'
+      operationId: quitarPersonaje
+      description: 'Este metodo quita el personaje del listado de favoritos'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: "Character's ID."
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
