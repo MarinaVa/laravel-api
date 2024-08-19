@@ -16,6 +16,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::any('{any}', function(){
-    return response(['error' => 'No hay such route'], Response::HTTP_NOT_FOUND);
+    return response(['error' => "Such route doesn't exist"], Response::HTTP_NOT_FOUND);
 })->where('any', '.*');
 
