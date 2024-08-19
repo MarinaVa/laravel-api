@@ -96,11 +96,11 @@ class CharactersController extends Controller
      */
     public function deleteCharacter($id)
     {
-        if (!is_numeric($id)) {
-            return response(['error' => 'The id must be a number'], Response::HTTP_BAD_REQUEST);
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            return response(['error' => 'The id must be an integer'], Response::HTTP_BAD_REQUEST);
         }
         
-        $character = Character::getFavoriteByParam('id', (int)$id);
+        $character = Character::getFavoriteByParam('id', $id);
         
         if (!$character) {
             return response(['error' => 'The character is absent in the favorite list'], Response::HTTP_NOT_FOUND);
